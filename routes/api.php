@@ -22,12 +22,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
-// nueva rutas 
-
 // Public routes of authtication
 Route::controller(LoginRegisterController::class)->group(function() {
     Route::post('/register', 'register');
@@ -63,9 +57,14 @@ Route::middleware('auth:sanctum')->group( function () {
     Route::post('/logout', [LoginRegisterController::class, 'logout']);
 
 Route::controller(CategoriaController::class)->group(function() {
-    Route::get('/category', 'index');
+   
     Route::post('/category', 'store');
     Route::post('/category/{id}', 'update');
     Route::delete('/category/{id}', 'destroy');
     });
 });
+
+Route::controller(CategoriaController::class)->group(function() {
+    Route::get('/category', 'index');
+    Route::get('/category/{id}', 'show');
+    });
