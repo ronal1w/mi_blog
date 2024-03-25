@@ -17,7 +17,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::latest()->get();
+        $products = Product::paginate(10);
         
         if (is_null($products->first())) {
             return response()->json([
