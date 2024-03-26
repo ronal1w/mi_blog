@@ -46,8 +46,19 @@ Route::middleware('auth:sanctum')->group( function () {
     });
 });
 
+Route::middleware('auth:sanctum')->group( function () {
+    Route::post('/logout', [LoginRegisterController::class, 'logout']);
+
+    Route::controller(BlogController::class)->group(function() {
+        Route::post('/blog', 'store');
+        Route::post('/blog/{id}', 'update');
+        Route::delete('/blog/{id}', 'destroy');
+    });
+});
+
 Route::controller(BlogController::class)->group(function() {
     Route::get('/blog', 'index');
+    Route::get('/blog/{id}', 'show');
     Route::post('/blog/{id}', 'update');
     Route::delete('/blog/{id}', 'destroy');
 });
